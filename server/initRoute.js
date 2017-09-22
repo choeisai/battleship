@@ -41,60 +41,6 @@ const initRoute = (app) => {
 
   // Update defender
   router.route('/games/:game_id/defender')
-    .get(async (req, res) => {
-      const gameId = req.params.game_id
-      try {
-        const shipPos = await Defender.find({ gameId }, 'position', (err, position) => {
-          return position
-        })
-        let allPos = []
-        shipPos.map(({ position }) => {
-          position.map((value) => {
-            allPos.push(value)
-          })
-        })
-
-        // Debug position available
-        const debug = {
-          row: req.query.row,
-          col: req.query.col
-        }
-
-        let isPosAvailable = true
-        for (let i = 0; i < allPos.length; i++) {
-          for (let j = parseInt(debug.row) - 1; j <= parseInt(debug.row) + 1; j++) {
-            for (let k = debug.col.charCodeAt(0) - 1; k <= debug.col.charCodeAt(0) + 1; k++) {
-              if (allPos[i].row === j.toString() && allPos[i].col === String.fromCharCode(k)) {
-                console.log(`Debug ${debug.row}${debug.col} is overlap ${allPos[i].row}${allPos[i].col}`)
-                isPosAvailable = false
-                return res.json(shipPos)
-              }
-            }
-          }
-        }
-
-        if (isPosAvailable) {
-          console.log(`Debug ${debug.row}${debug.col} is available`)
-        }
-
-        // console.log('Padding', debug.row, debug.row - 1, 1 + parseInt(debug.row))
-        // for (let i = parseInt(debug.row) - 1; i <= parseInt(debug.row) + 1; i++) {
-        //   for (let j = debug.col.charCodeAt(0) - 1; j <= debug.col.charCodeAt(0) + 1; j++) {
-        //     console.log(`${i}${String.fromCharCode(j)}`)
-        //   }
-        // }
-
-        return res.json(shipPos)
-      } catch (err) {
-        debug.error(error.name, error.message)
-        return res.status(500).json({
-          error: {
-            name: error.name,
-            message: error.message
-          }
-        })
-      }
-    })
     .post(async (req, res) => {
       const gameId = req.params.game_id
       let { position } = req.body
