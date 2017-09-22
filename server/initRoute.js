@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const Game = require('../models/game')
 const Defender = require('../models/defender')
+const Attacker = require('../models/attacker')
 const bodyParser = require('body-parser')
 const Validator = require('../lib/validator')
 
@@ -156,6 +157,34 @@ const initRoute = (app) => {
           ship: result.ship,
           position: result.position
         })
+      } catch (error) {
+        debug.error(error.name, error.message)
+        return res.status(500).json({
+          error: {
+            name: error.name,
+            message: error.message
+          }
+        })
+      }
+    })
+
+
+  // Attacker
+  router.route('/games/:game_id/attacker')
+    .post(async (req, res) => {
+      const gameId = req.params.game_id
+      let { position } = req.body
+
+      const NewAttacker = Attacker({
+        gameId,
+        fire: position
+      })
+
+      try {
+        const result = await NewAttacker.save((err, attacker) => {
+          return attacker
+        })
+        return res.json(result)
       } catch (error) {
         debug.error(error.name, error.message)
         return res.status(500).json({
