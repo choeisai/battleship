@@ -14,7 +14,8 @@ const defenderSchema = new Schema({
     require: true,
     enum: ['BATTLESHIP', 'CRUISER', 'DESTROYER', 'SUBMARINE']
   },
-  position: [Position]
+  position: [Position],
+  hitCount: { type: Number, default: 0 }
 }, { timestamps: true })
 
 // Validate gameId
