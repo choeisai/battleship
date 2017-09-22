@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --watch . index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watchAll --runInBand"
   },
   "repository": {
     "type": "git",
@@ -18,9 +18,14 @@
   },
   "homepage": "https://github.com/karrung/battleship#readme",
   "dependencies": {
+    "body-parser": "^1.18.1",
     "dotenv": "^4.0.0",
     "express": "^4.15.4",
     "mongoose": "^4.11.12",
-    "nodemon": "^1.12.1"
+    "nodemon": "^1.12.1",
+    "validator": "^8.2.0"
+  },
+  "devDependencies": {
+    "jest": "^21.1.0"
   }
 }
