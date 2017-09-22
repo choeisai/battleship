@@ -1,0 +1,32 @@
+{
+  "name": "battleship",
+  "version": "1.0.0",
+  "description": "Battlesip board game api",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon --watch . index.js",
+    "test": "jest --watchAll --runInBand"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karrung/battleship.git"
+  },
+  "author": "Chalermrat Srinara",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karrung/battleship/issues"
+  },
+  "homepage": "https://github.com/karrung/battleship#readme",
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.4",
+    "mongoose": "^4.11.12",
+    "nodemon": "^1.12.1",
+    "validator": "^8.2.0"
+  },
+  "devDependencies": {
+    "jest": "^21.1.0"
+  }
+}
